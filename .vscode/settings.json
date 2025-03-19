@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "blink.h": "c",
+        "app_version.h": "c"
+    }
+}
