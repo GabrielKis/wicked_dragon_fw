@@ -5,24 +5,20 @@
 # as the module CMake entry point (see zephyr/module.yml).
 cmake_minimum_required(VERSION 3.22)
 
+# Set board
 set(BOARD my_esp32_devkitc_wroom/esp32/procpu)
 set(BOARD_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
+# Add zephyr base path
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
+
+# Add project name
 project(wicked_dragon_fw)
 
-message(STATUS "ZEPHYR_BASE = ${ZEPHYR_BASE}")
-target_include_directories(app PRIVATE ${ZEPHYR_BASE}/include/generated/zephyr)
- zephyr_syscall_include_directories(include)
- zephyr_include_directories(include)
-#
-#set(BOARD_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/boards)
+# How to add message on build
+#message(STATUS "ZEPHYR_BASE = ${ZEPHYR_BASE}")
 
-
-#add_subdirectory(drivers)
-#add_subdirectory(boards/xtensa)
-#add_subdirectory(lib)
-#project(app LANGUAGES C)
-target_include_directories(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+# Add include path
+zephyr_include_directories(include)
 
 target_sources(app PRIVATE src/main.c)
