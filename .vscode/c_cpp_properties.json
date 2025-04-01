@@ -1,0 +1,21 @@
+{
+    "configurations": [
+    {
+        "name": "Zephyr",
+        "includePath": [
+          "${workspaceFolder}/**",
+          "${workspaceFolder}/../zephyr/include",
+          "${workspaceFolder}/build/zephyr/include/generated", // Critical for autoconf.h
+          "${workspaceFolder}/build/zephyr/include"           // For other generated headers
+        ]
+    }
+        // "defines": [
+        //   // Manually add defines if needed (temporary workaround)
+        //   "CONFIG_SYS_CLOCK_TICKS_PER_SEC=1000" // Example value; replace with yours!
+        // ],
+        // "compilerPath": "/path/to/your/toolchain/arm-zephyr-eabi-gcc",
+        // "cStandard": "c11",
+        // "intelliSenseMode": "gcc-arm"
+    ],
+    "version": 4
+}
