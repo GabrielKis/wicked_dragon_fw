@@ -21,4 +21,9 @@ project(wicked_dragon_fw)
 # Add include path
 zephyr_include_directories(include)
 
-target_sources(app PRIVATE src/main.c)
+target_sources(app PRIVATE
+                src/main.c
+                src/uart_cmd.c
+)
+
+target_include_directories(app PRIVATE src)
