@@ -20,9 +20,9 @@
 		};
 	};
 
-	ledc0_default: ledc0_default {
+	mcpwm0_default: mcpwm0_default {
 		group1 {
-			pinmux = <LEDC_CH0_GPIO4>;
+			pinmux = <MCPWM0_OUT0A_GPIO4>;
 			output-enable;
 		};
 	};
