@@ -21,6 +21,7 @@
 		sw0 = &button0;
 		watchdog0 = &wdt0;
 		led0 = &led0;
+		pwm-servo = &ledc0;
 	};
 
 	buttons {
@@ -57,18 +58,6 @@
 	pinctrl-names = "default";
 };
 
-// &uart1 {
-// 	current-speed = <115200>;
-// 	pinctrl-0 = <&uart1_default>;
-// 	pinctrl-names = "default";
-// };
-
-// &uart2 {
-// 	current-speed = <115200>;
-// 	pinctrl-0 = <&uart2_default>;
-// 	pinctrl-names = "default";
-// };
-
 &gpio0 {
 	status = "okay";
 };
@@ -77,67 +66,14 @@
 	status = "okay";
 };
 
-// &touch {
-// 	debounce-interval-ms = <30>;
-// 	href-microvolt = <2700000>;
-// 	lref-microvolt = <500000>;
-// 	href-atten-microvolt = <1000000>;
-// 	filter-mode = <ESP32_TOUCH_FILTER_MODE_IIR_16>;
-// 	filter-debounce-cnt = <1>;
-// 	filter-noise-thr = <ESP32_TOUCH_FILTER_NOISE_THR_4_8TH>;
-// 	filter-jitter-step = <4>;
-// 	filter-smooth-level = <ESP32_TOUCH_FILTER_SMOOTH_MODE_IIR_2>;
-// };
-
-// &i2c0 {
-// 	status = "okay";
-// 	clock-frequency = <I2C_BITRATE_STANDARD>;
-// 	sda-gpios = <&gpio0 21 GPIO_OPEN_DRAIN>;
-// 	scl-gpios = <&gpio0 22 GPIO_OPEN_DRAIN>;
-// 	pinctrl-0 = <&i2c0_default>;
-// 	pinctrl-names = "default";
-// };
-
-// &spi2 {
-// 	#address-cells = <1>;
-// 	#size-cells = <0>;
-// 	status = "okay";
-// 	pinctrl-0 = <&spim2_default>;
-// 	pinctrl-names = "default";
-// };
-
-// &spi3 {
-// 	#address-cells = <1>;
-// 	#size-cells = <0>;
-// 	status = "okay";
-// 	pinctrl-0 = <&spim3_default>;
-// 	pinctrl-names = "default";
-// };
-
-&timer0 {
-	status = "disabled";
-};
-
-&timer1 {
-	status = "disabled";
-};
-
-&timer2 {
-	status = "disabled";
-};
-
-&timer3 {
-	status = "disabled";
-};
-
-&trng0 {
-	status = "disabled";
-};
-
-&psram0 {
-	status = "disabled";
-};
-
-&esp32_bt_hci {
-	status = "disabled";
+&ledc0 {
+    status = "okay";
+    pinctrl-0 = <&ledc0_default>;
+    pinctrl-names = "default";
+    #address-cells = <1>;
+    #size-cells = <0>;
+    channel0@0 {
+        reg = <0x0>;
+        timer = <0>;
+    };
 };
