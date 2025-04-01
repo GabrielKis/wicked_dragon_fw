@@ -7,7 +7,9 @@
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/drivers/pwm.h>
+
 #include <app_version.h>
+#include "uart_cmd.h"
 
 /* LED device tree specification */
 #define LED0_NODE DT_ALIAS(led0)
@@ -34,6 +36,12 @@ int main(void)
         return 1;
     }
 
+    if (!device_is_ready(led.port)) {
+        printk("Error: LED device %s is not ready\n", led.port->name);
+        return 1;
+    }
+
+
     /* Set initial position (middle) */
     ret = pwm_set(servo.dev, 0, PWM_USEC(PERIOD_US), PWM_USEC(PERIOD_US / 2), 0);
     if (ret < 0) {
@@ -43,23 +51,22 @@ int main(void)
 
     printk("Zephyr Example Application %s\n", APP_VERSION_STRING);
 
-    if (!device_is_ready(led.port)) {
-        printk("Error: LED device %s is not ready\n", led.port->name);
-        return 1;
-    }
-
     ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
     if (ret < 0) {
         printk("Error %d: failed to configure LED pin\n", ret);
         return 1;
     }
 
+    uart_thread_start();
+
     while (1) {
-        /* Toggle LED state */
-        gpio_pin_toggle_dt(&led);
-        k_sleep(K_MSEC(50));
-        gpio_pin_toggle_dt(&led);
-        k_sleep(K_MSEC(1000));
+        k_msleep(10);  // Small delay to prevent busy-waiting
+
+        // /* Toggle LED state */
+        // gpio_pin_toggle_dt(&led);
+        // k_sleep(K_MSEC(50));
+        // gpio_pin_toggle_dt(&led);
+        // k_sleep(K_MSEC(1000));
     }
 
     return 0;
