@@ -23,8 +23,12 @@ zephyr_include_directories(include)
 
 target_sources(app PRIVATE
                 src/main.c
-                src/uart_cmd.c
-                src/servo_control.c
+                src/message_hmi_main.c
+                src/hmi/uart_cmd.c
+                src/servo/servo_control.c
 )
 
-target_include_directories(app PRIVATE src)
+target_include_directories(app PRIVATE  src
+                                        src/hmi
+                                        src/servo
+)
